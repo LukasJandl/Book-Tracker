@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.aspectj.lang.annotation.RequiredTypes;
 
 @Getter
 @Setter
@@ -25,4 +26,6 @@ public class Book {
     private String author;
     private String description;
     private float rating;
+    private BookStatus status;
+    private int pages;
 }
