@@ -12,10 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/books")
-public class BookEndpoint {
+public class BookshelfEndpoint {
     private final BookService bookService;
 
-    public BookEndpoint(BookService bookService) {
+    public BookshelfEndpoint(BookService bookService) {
         this.bookService = bookService;
     }
 
