@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class BookService {
+public class BookshelfService {
     private final BookRepository bookRepository;
 
-    public BookService(BookRepository bookRepository) {
+    public BookshelfService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
 
@@ -25,11 +25,11 @@ public class BookService {
     }
 
     public void saveBook(Book newBook) {
-        Book book = bookRepository.getBookByName(newBook.getName());
+        Book book = bookRepository.getBookByName(newBook.getTitle());
         if (book == null) {
             bookRepository.save(newBook);
         } else {
-            throw new BookAlreadyExistsException("The Book: " + newBook.getName() + " is already saved");
+            throw new BookAlreadyExistsException("The Book: " + newBook.getTitle() + " is already saved");
         }
     }
 
