@@ -10,11 +10,11 @@ public class WebClientService {
     public WebClient.Builder getWebClientBuilder(){
         return WebClient.builder();
     }
-    public String get(String api, String params, String apiKey)
+    public String get(String api, String params, String apiKey, String maxResults)
             throws WebClientResponseException{
         return getWebClientBuilder().build()
                 .get()
-                .uri(api + params + apiKey)
+                .uri(api + params + apiKey + maxResults)
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();

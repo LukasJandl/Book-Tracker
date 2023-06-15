@@ -24,9 +24,9 @@ public class BookshelfEndpoint {
         return bookshelfService.getAllBooks();
     }
 
-    @GetMapping("/{name}")
-    public Book getBook(@PathVariable String name) {
-        return bookshelfService.getBook(name);
+    @GetMapping("/{title}")
+    public Book getBook(@PathVariable String title) {
+        return bookshelfService.getBook(title);
     }
 
     @PostMapping
@@ -39,23 +39,23 @@ public class BookshelfEndpoint {
         }
     }
 
-    @PutMapping("/{name}")
-    public ResponseEntity<String> updateBook(@PathVariable String name, @RequestBody Book updatedBook) {
+    @PutMapping("/{title}")
+    public ResponseEntity<String> updateBook(@PathVariable String title, @RequestBody Book updatedBook) {
         try {
-            bookshelfService.updateBookByName(name, updatedBook);
+            bookshelfService.updateBookByName(title, updatedBook);
             return new ResponseEntity<>("Successfully updated book", HttpStatus.OK);
         } catch (ObjectNotFoundException exception) {
-            return new ResponseEntity<>("Could not find the Book: " + name, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Could not find the Book: " + title, HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("/{name}")
-    public ResponseEntity<String> deleteBook(@PathVariable String name) {
+    @DeleteMapping("/{title}")
+    public ResponseEntity<String> deleteBook(@PathVariable String title) {
         try {
-            bookshelfService.deleteBookByName(name);
+            bookshelfService.deleteBookByName(title);
             return new ResponseEntity<>("Successfully deleted book", HttpStatus.OK);
         } catch (ObjectNotFoundException exception) {
-            return new ResponseEntity<>("Could not find the Book: " + name, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Could not find the Book: " + title, HttpStatus.NOT_FOUND);
         }
     }
 }

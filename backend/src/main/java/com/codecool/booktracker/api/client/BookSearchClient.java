@@ -18,6 +18,7 @@ public class BookSearchClient {
 
     public String getBy(String name) {
         String params = "?q=" + name;
-        return webClientService.get(booksApi, params, booksApiKey);
+        String maxResults = "&maxResults=40";
+        return webClientService.get(booksApi, params, booksApiKey, maxResults);
     }
 }

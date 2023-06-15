@@ -21,11 +21,11 @@ public class BookshelfService {
     }
 
     public Book getBook(String name) {
-        return bookRepository.getBookByName(name);
+        return bookRepository.getBookByTitle(name);
     }
 
     public void saveBook(Book newBook) {
-        Book book = bookRepository.getBookByName(newBook.getTitle());
+        Book book = bookRepository.getBookByTitle(newBook.getTitle());
         if (book == null) {
             bookRepository.save(newBook);
         } else {
@@ -34,7 +34,7 @@ public class BookshelfService {
     }
 
     public void updateBookByName(String name, Book updatedBook) {
-        Book book = bookRepository.getBookByName(name);
+        Book book = bookRepository.getBookByTitle(name);
         if (book != null) {
             book.setStatus(updatedBook.getStatus());
             book.setRating(updatedBook.getRating());
@@ -45,7 +45,7 @@ public class BookshelfService {
     }
 
     public void deleteBookByName(String name) {
-        Book book = bookRepository.getBookByName(name);
+        Book book = bookRepository.getBookByTitle(name);
         if (book != null) {
             bookRepository.delete(book);
         } else {
