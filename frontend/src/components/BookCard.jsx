@@ -2,9 +2,9 @@ import Image from "./Image";
 
 export default function BookCard({ book }) {
     const getImageLink = () => {
-        const NO_IMAGE_URL = "/no-image-icon.png";
+        const NO_IMAGE_URL = "/image_not_available.jpg";
         if (book.volumeInfo.imageLinks == null) {
-            return process.env.PUBLIC_URL + NO_IMAGE_URL;
+            return NO_IMAGE_URL;
         } else {
             return book.volumeInfo.imageLinks.thumbnail;
         }
@@ -20,11 +20,11 @@ export default function BookCard({ book }) {
         return description == null ? null : description.substr(0, 300) + "...";
     };
     return (
-        <div className="container text-center">
+        <div className="container">
             <div className="card" style={{ width: "60rem" }}>
                 <div className="row d-flex flex-wrap align-items-center">
                     <div className="col-md-auto">
-                        {book.volumeInfo.imageLinks && <Image thumbnail={getImageLink()}/>}
+                        <Image thumbnail={getImageLink()}/>
                     </div>
                     <div className="col">
                         <div className="card-body">
