@@ -1,4 +1,4 @@
-import Book from "./BookCard"
+import Book from "./BookCard";
 
 export default function BooksCard({ books }) {
     return (
@@ -7,5 +7,5 @@ export default function BooksCard({ books }) {
                 <Book key={book.id} book={book} />
             ))}
         </div>
-    )
+    );
 }
