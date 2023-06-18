@@ -1,18 +1,15 @@
+import Rating from "./Rating";
+import Image from "./Image";
+import BookDetails from "./BookDetails";
+
 export default function BookModal({ closeModal, getImageLink, getAuthors, book }) {
     const modalStyle = {
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)",
     };
 
-    document.onkeydown = (event) => {
-        if (event.code === "Escape") {
-            closeModal();
-        }
-    };
-
     return (
         <div className="modal show fade" style={modalStyle} tabIndex="-1">
-            {console.log("rendered modal component")}
             <div className="modal-dialog modal-dialog-scrollable">
                 <div className="modal-content">
                     <div className="modal-header">
@@ -21,9 +18,10 @@ export default function BookModal({ closeModal, getImageLink, getAuthors, book }
                         <button type="button" className="btn-close" aria-label="Close" onClick={closeModal}></button>
                     </div>
                     <div className="modal-body">
-                        <div className="text-center">
-                            <img src={getImageLink()} alt="" />
-                        </div>
+                        <Image thumbnail={getImageLink()} />
+                        <Rating book={book} />
+                        <BookDetails book={book} />
+                        <h5>Description:</h5>
                         <p>{book.volumeInfo.description}</p>
                     </div>
                     <div className="modal-footer">
