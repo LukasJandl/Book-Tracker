@@ -1,6 +1,18 @@
+import { useState } from "react";
+import BookModal from "./BookModal";
 import Image from "./Image";
 
 export default function BookCard({ book }) {
+    const [showModal, setShowModal] = useState(false);
+
+    const openModal = () => {
+        return setShowModal(true);
+    };
+
+    const closeModal = () => {
+        return setShowModal(false);
+    };
+
     const getImageLink = () => {
         const NO_IMAGE_URL = "/image_not_available.jpg";
         if (book.volumeInfo.imageLinks == null) {
@@ -21,10 +33,10 @@ export default function BookCard({ book }) {
     };
     return (
         <div className="container">
-            <div className="card" style={{ width: "60rem" }}>
+            <div className="card" style={{ width: "60rem" }} onClick={openModal}>
                 <div className="row d-flex flex-wrap align-items-center">
                     <div className="col-md-auto">
-                        <Image thumbnail={getImageLink()}/>
+                        <Image thumbnail={getImageLink()} />
                     </div>
                     <div className="col">
                         <div className="card-body">
@@ -35,6 +47,9 @@ export default function BookCard({ book }) {
                     </div>
                 </div>
             </div>
+            {showModal && (
+                <BookModal closeModal={closeModal} getImageLink={getImageLink} getAuthors={getAuthors} book={book} />
+            )}
         </div>
     );
 }
