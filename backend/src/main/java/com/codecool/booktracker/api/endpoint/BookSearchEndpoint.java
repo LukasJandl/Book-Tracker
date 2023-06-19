@@ -17,8 +17,18 @@ public class BookSearchEndpoint {
         this.bookSearchService = bookSearchService;
     }
 
-    @GetMapping("{name}")
-    public List<BookDTO> getByName(@PathVariable String name) throws JsonProcessingException {
-        return bookSearchService.getByName(name);
+    @GetMapping("/title/{title}")
+    public List<BookDTO> getByTitle(@PathVariable String title) throws JsonProcessingException {
+        return bookSearchService.getByTitle(title);
+    }
+
+    @GetMapping("/author/{author}")
+    public List<BookDTO> getByAuthor(@PathVariable String author) throws JsonProcessingException {
+        return bookSearchService.getByAuthor(author);
+    }
+
+    @GetMapping("/title/{title}/author/{author}")
+    public List<BookDTO> getByTitleAndAuthor(@PathVariable String title, @PathVariable String author) throws JsonProcessingException {
+        return bookSearchService.getByTitleAndAuthor(title, author);
     }
 }

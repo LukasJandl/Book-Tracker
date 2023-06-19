@@ -23,13 +23,22 @@ async function fetchData(axiosConfig) {
         });
 }
 
-export function getBooks(title) {
-    const axiosConfig = getAxiosConfig("/api/search/books/" + title, "GET", {});
+export function getBooksByTitle(title) {
+    const axiosConfig = getAxiosConfig("/api/search/books/title/" + title, "GET", {});
+    return fetchData(axiosConfig);
+}
+
+export function getBooksByAuthor(author) {
+    const axiosConfig = getAxiosConfig("/api/search/books/author/" + author, "GET", {});
+    return fetchData(axiosConfig);
+}
+
+export function getBooksByTitleAndAuthor(title, author) {
+    const axiosConfig = getAxiosConfig("/api/search/books/title/" + title + "/author/" + author, "GET", {});
     return fetchData(axiosConfig);
 }
 
 export function saveNewBook(book) {
     const axiosConfig = getAxiosConfig("/api/bookshelf", "POST", book);
-    console.log(axiosConfig.data);
     return fetchData(axiosConfig);
 }

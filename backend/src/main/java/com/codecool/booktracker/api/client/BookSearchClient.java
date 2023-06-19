@@ -16,8 +16,20 @@ public class BookSearchClient {
         this.webClientService = webClientService;
     }
 
-    public String getBy(String name) {
-        String params = "?q=" + name;
+    public String getByTitle(String title) {
+        String params = "?q=intitle:" + title;
+        String maxResults = "&maxResults=10";
+        return webClientService.get(booksApi, params, booksApiKey, maxResults);
+    }
+
+    public String getByAuthor(String author) {
+        String params = "?q=inauthor:" + author;
+        String maxResults = "&maxResults=10";
+        return webClientService.get(booksApi, params, booksApiKey, maxResults);
+    }
+
+    public String getByTitleAndAuthor(String title, String author) {
+        String params = "?q=intitle:" + title + "+inauthor:" + author;
         String maxResults = "&maxResults=10";
         return webClientService.get(booksApi, params, booksApiKey, maxResults);
     }

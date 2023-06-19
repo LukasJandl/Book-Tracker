@@ -1,50 +1,15 @@
 import { useState } from "react";
-import { getBooks } from "../../functions/fetch";
 
 import BooksCard from "../BooksCard";
+import SearchFields from "../SearchFields";
 
 export default function Home() {
-    const [searchParam, setSearchParam] = useState("");
     const [books, setBooks] = useState([]);
-
-    const handleChange = (event) => {
-        setSearchParam(event.target.value);
-    };
-
-    const handleKeyDown = (event) => {
-        if (event.key === "Enter") {
-            searchForBooks();
-        }
-    };
-
-    const searchForBooks = async () => {
-        const response = await getBooks(searchParam);
-        if (response.status === 200) {
-            setBooks(response.data);
-        } else {
-            alert("Something went wrong!");
-        }
-    };
 
     return (
         <>
             <div>
-                <input
-                    type="text"
-                    id="TitleSearchField"
-                    value={searchParam}
-                    onChange={handleChange}
-                    onKeyDown={handleKeyDown}
-                />
-                {books.length > 0 && (
-                    <input
-                        type="text"
-                        id="AuthorSearchField"
-                        value={books[0].volumeInfo.title}
-                        onChange={handleChange}
-                        onKeyDown={handleKeyDown}
-                    />
-                )}
+                <SearchFields setBooks={setBooks} />
             </div>
             <div>
                 <BooksCard books={books} />
