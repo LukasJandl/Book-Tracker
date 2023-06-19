@@ -1,6 +1,8 @@
 import Rating from "./Rating";
 import Image from "./Image";
 import BookDetails from "./BookDetails";
+import Description from "./Description";
+import SaveButtons from "./SaveButtons";
 
 export default function BookModal({ closeModal, getImageLink, getAuthors, book }) {
     const modalStyle = {
@@ -13,24 +15,20 @@ export default function BookModal({ closeModal, getImageLink, getAuthors, book }
             <div className="modal-dialog modal-dialog-scrollable">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title">{book.volumeInfo.title}</h5>
-                        <h6 className="card-subtitle mb-2 text-body-secondary">{getAuthors()}</h6>
+                        <h5 className="modal-title">
+                            {book.volumeInfo.title}
+                            <h6 className="card-subtitle text-body-secondary">{getAuthors()}</h6>
+                        </h5>
                         <button type="button" className="btn-close" aria-label="Close" onClick={closeModal}></button>
                     </div>
                     <div className="modal-body">
                         <Image thumbnail={getImageLink()} />
                         <Rating book={book} />
                         <BookDetails book={book} />
-                        <h5>Description:</h5>
-                        <p>{book.volumeInfo.description}</p>
+                        <Description book={book} />
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary">
-                            Close
-                        </button>
-                        <button type="button" className="btn btn-primary">
-                            Save changes
-                        </button>
+                        <SaveButtons />
                     </div>
                 </div>
             </div>
