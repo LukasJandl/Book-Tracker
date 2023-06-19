@@ -1,4 +1,4 @@
-export default function BookDetails({ book }) {
+export default function BookDetails({ book, getCategories }) {
     return (
         <>
             <div className="d-flex justify-content-between">
@@ -11,7 +11,7 @@ export default function BookDetails({ book }) {
                     <p>Page count: {book.volumeInfo.pageCount}</p>
                 </div>
             </div>
-            <p>Category: {book.volumeInfo.categories}</p>
+            <p>Category: {getCategories(book)}</p>
         </>
     );
 }

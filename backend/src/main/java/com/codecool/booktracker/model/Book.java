@@ -18,10 +18,17 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String title;
-    private String author;
+    private String googleId;
+    public String title;
+    private String authors;
+    private String publisher;
+    private String publishedDate;
     private String description;
-    private float rating;
-    private BookStatus status;
-    private int pages;
+    private int pageCount;
+    private String categories;
+    private float averageRating;
+    private int ratingsCount;
+    private String language;
+    private String thumbnail;
+    private String status;
 }

@@ -19,7 +19,11 @@ export default function Home() {
 
     const searchForBooks = async () => {
         const response = await getBooks(searchParam);
-        setBooks(response.data);
+        if (response.status === 200) {
+            setBooks(response.data);
+        } else {
+            alert("Something went wrong!");
+        }
     };
 
     return (

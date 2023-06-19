@@ -3,6 +3,7 @@ import Image from "./Image";
 import BookDetails from "./BookDetails";
 import Description from "./Description";
 import SaveButtons from "./SaveButtons";
+import { getCategories } from "../functions/getData";
 
 export default function BookModal({ closeModal, getImageLink, getAuthors, book }) {
     const modalStyle = {
@@ -17,18 +18,25 @@ export default function BookModal({ closeModal, getImageLink, getAuthors, book }
                     <div className="modal-header">
                         <h5 className="modal-title">
                             {book.volumeInfo.title}
-                            <h6 className="card-subtitle text-body-secondary">{getAuthors()}</h6>
+                            <div>
+                                <i className="card-subtitle text-body-secondary small">{getAuthors(book)}</i>
+                            </div>
                         </h5>
                         <button type="button" className="btn-close" aria-label="Close" onClick={closeModal}></button>
                     </div>
                     <div className="modal-body">
-                        <Image thumbnail={getImageLink()} />
+                        <Image thumbnail={getImageLink(book)} />
                         <Rating book={book} />
-                        <BookDetails book={book} />
+                        <BookDetails book={book} getCategories={getCategories} />
                         <Description book={book} />
                     </div>
                     <div className="modal-footer">
-                        <SaveButtons />
+                        <SaveButtons
+                            book={book}
+                            getAuthors={getAuthors}
+                            getImageLink={getImageLink}
+                            getCategories={getCategories}
+                        />
                     </div>
                 </div>
             </div>

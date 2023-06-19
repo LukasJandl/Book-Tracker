@@ -20,12 +20,12 @@ public class BookshelfService {
         return bookRepository.findAll();
     }
 
-    public Book getBook(String name) {
-        return bookRepository.getBookByTitle(name);
+    public Book getBook(String id) {
+        return bookRepository.getBookByGoogleId(id);
     }
 
     public void saveBook(Book newBook) {
-        Book book = bookRepository.getBookByTitle(newBook.getTitle());
+        Book book = bookRepository.getBookByGoogleId(newBook.getGoogleId());
         if (book == null) {
             bookRepository.save(newBook);
         } else {
@@ -33,19 +33,18 @@ public class BookshelfService {
         }
     }
 
-    public void updateBookByName(String name, Book updatedBook) {
-        Book book = bookRepository.getBookByTitle(name);
+    public void updateBookByName(String id, Book updatedBook) {
+        Book book = bookRepository.getBookByGoogleId(id);
         if (book != null) {
             book.setStatus(updatedBook.getStatus());
-            book.setRating(updatedBook.getRating());
             bookRepository.save(book);
         } else {
             throw new ObjectNotFoundException(Book.class, "Book");
         }
     }
 
-    public void deleteBookByName(String name) {
-        Book book = bookRepository.getBookByTitle(name);
+    public void deleteBookByName(String id) {
+        Book book = bookRepository.getBookByGoogleId(id);
         if (book != null) {
             bookRepository.delete(book);
         } else {
