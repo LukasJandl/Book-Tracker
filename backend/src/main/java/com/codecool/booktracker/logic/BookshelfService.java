@@ -27,6 +27,7 @@ public class BookshelfService {
     public void saveBook(Book newBook) {
         Book book = bookRepository.getBookByGoogleId(newBook.getGoogleId());
         if (book == null) {
+            newBook.setDescription(newBook.getDescription().substring(0, 255));
             bookRepository.save(newBook);
         } else {
             throw new BookAlreadyExistsException("The Book: " + newBook.getTitle() + " is already saved");

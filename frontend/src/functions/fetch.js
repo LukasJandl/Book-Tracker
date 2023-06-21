@@ -42,3 +42,8 @@ export function saveNewBook(book) {
     const axiosConfig = getAxiosConfig("/api/bookshelf", "POST", book);
     return fetchData(axiosConfig);
 }
+
+export function getAllBooks() {
+    const axiosConfig = getAxiosConfig("/api/bookshelf/all", "GET", {});
+    return fetchData(axiosConfig);
+}
