@@ -17,11 +17,5 @@ export default function Bookshelf() {
         }
     };
 
-    return (
-        <div>
-            {books.map((book) => (
-                <div key={book.id}>{book.title}</div>
-            ))}
-        </div>
-    );
+    return <div>{books.length !== null && books.map((book) => <div key={book.id}>{book.title}</div>)}</div>;
 }

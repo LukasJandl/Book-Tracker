@@ -26,6 +26,12 @@ export default function Navbar() {
                         <NavLink className="nav-link" to="/Bookshelf">
                             Bookshelf
                         </NavLink>
+                        <NavLink className="nav-link" to="/SignUp">
+                            Register
+                        </NavLink>
+                        <NavLink className="nav-link" to="/SignIn">
+                            Login
+                        </NavLink>
                     </div>
                 </div>
             </div>
