@@ -49,14 +49,16 @@ export function getBooksByTitleAndAuthor(title, author) {
 }
 
 export function saveNewBook(book) {
+    const username = localStorage.getItem("user");
     const token = "Bearer " + localStorage.getItem("bearerToken");
-    const axiosConfig = getAxiosConfig("/api/bookshelf", "POST", token, book);
+    const axiosConfig = getAxiosConfig("/api/bookshelf/" + username, "POST", token, book);
     return fetchData(axiosConfig);
 }
 
 export function getAllBooks() {
+    const username = localStorage.getItem("user");
     const token = "Bearer " + localStorage.getItem("bearerToken");
-    const axiosConfig = getAxiosConfig("/api/bookshelf/all", "GET", token, {});
+    const axiosConfig = getAxiosConfig("/api/bookshelf/all/" + username, "GET", token, {});
     return fetchData(axiosConfig);
 }
 

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Buffer } from "buffer";
 import { authenticateUser } from "../../functions/fetch";
 
-export default function SignIn() {
+export default function SignIn({ setUser }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [responseMessage, setResponsemessage] = useState("");
@@ -19,6 +19,7 @@ export default function SignIn() {
         if (response.status === 200) {
             localStorage.setItem("bearerToken", response.data);
             localStorage.setItem("user", username);
+            setUser(username);
             setResponsemessage("Login successful!");
             console.log(response.data);
             setTimeout(() => navigate("/"), 1500);

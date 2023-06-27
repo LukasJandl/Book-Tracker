@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar({ user }) {
     return (
-        <nav className="navbar navbar-expand-sm bg-body-tertiary">
+        <nav className="navbar sticky-top navbar-expand-sm bg-body-tertiary">
             <div className="container-fluid">
                 <NavLink className="navbar-brand" to={"/"}>
                     BookTracker
@@ -26,12 +26,21 @@ export default function Navbar() {
                         <NavLink className="nav-link" to="/Bookshelf">
                             Bookshelf
                         </NavLink>
-                        <NavLink className="nav-link" to="/SignUp">
-                            Register
-                        </NavLink>
-                        <NavLink className="nav-link" to="/SignIn">
-                            Login
-                        </NavLink>
+                        {user === null && (
+                            <>
+                                <NavLink className="nav-link" to="/SignUp">
+                                    Register
+                                </NavLink>
+                                <NavLink className="nav-link" to="/SignIn">
+                                    Login
+                                </NavLink>
+                            </>
+                        )}
+                        {user !== null && (
+                            <NavLink className="nav-link" to="/Logout">
+                                Logout
+                            </NavLink>
+                        )}
                     </div>
                 </div>
             </div>

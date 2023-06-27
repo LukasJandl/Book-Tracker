@@ -15,7 +15,6 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -36,26 +35,6 @@ import java.util.List;
 @EnableWebSecurity
 @EnableConfigurationProperties(RsaKeyProperties.class)
 public class SecurityConfiguration {
-
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        return http
-//                .csrf().disable()
-//                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-//                .headers().frameOptions().sameOrigin().and()
-//                .authorizeHttpRequests(authorize -> authorize
-//                        .requestMatchers(HttpMethod.GET,"/api/tags/**").hasRole("ROLE_USER")
-//                        .requestMatchers(HttpMethod.GET,"/api/tasks/**").hasRole("ROLE_USER")
-//                        .requestMatchers(HttpMethod.POST, "/api/tasks/**").hasRole("ROLE_USER")
-//                        .requestMatchers("/api/tasks/**").hasRole("ROLE_ADMIN")
-//                        .requestMatchers("/api/auth/**").permitAll()
-//                        .anyRequest().authenticated()
-//                )
-//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
-//                .httpBasic(Customizer.withDefaults())
-//                .build();
-//    }
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

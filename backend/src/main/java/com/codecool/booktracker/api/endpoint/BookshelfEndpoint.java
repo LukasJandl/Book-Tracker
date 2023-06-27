@@ -20,9 +20,9 @@ public class BookshelfEndpoint {
         this.bookshelfService = bookshelfService;
     }
 
-    @GetMapping("/all")
-    public List<Book> getBooks() {
-        return bookshelfService.getAllBooks();
+    @GetMapping("/all/{username}")
+    public List<Book> getBooks(@PathVariable String username) {
+        return bookshelfService.getAllBooks(username);
     }
 
     @GetMapping("/{title}")
@@ -30,10 +30,10 @@ public class BookshelfEndpoint {
         return bookshelfService.getBook(title);
     }
 
-    @PostMapping
-    public ResponseEntity<String> saveBook(@RequestBody Book book) {
+    @PostMapping("/{username}")
+    public ResponseEntity<String> saveBook(@PathVariable String username, @RequestBody Book book) {
         try {
-            bookshelfService.saveBook(book);
+            bookshelfService.saveBook(username, book);
             return new ResponseEntity<>("Successfully saved book", HttpStatus.OK);
         } catch (BookAlreadyExistsException exception) {
             return new ResponseEntity<>(exception.getMessage(), HttpStatus.CONFLICT);

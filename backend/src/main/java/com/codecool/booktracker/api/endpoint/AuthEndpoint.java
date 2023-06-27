@@ -23,7 +23,6 @@ public class AuthEndpoint {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
-        System.out.println("AuthEndpoint");
         return authEndpointService.register(user);
     }
 

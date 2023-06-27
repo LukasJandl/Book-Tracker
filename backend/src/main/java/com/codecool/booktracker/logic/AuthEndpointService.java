@@ -21,7 +21,6 @@ public class AuthEndpointService {
     }
 
     public String authenticate(Authentication authentication) {
-        System.out.println("authentication.getName() = " + authentication.getName());
         return jwtGenerator.generate(authentication);
     }
 
@@ -35,7 +34,6 @@ public class AuthEndpointService {
         user.getRoles().add("User");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-        System.out.println(userRepository.findByUsername("user"));
 
         return ResponseEntity.ok("User registered successfully!");
     }
