@@ -21,6 +21,7 @@ export default function SearchFields({ setBooks }) {
     };
 
     const handleInput = () => {
+        setBooks([]);
         if (author === "") {
             searchForBooksByTitle();
         } else if (title === "") {

@@ -3,7 +3,7 @@ import Image from "./Image";
 import BookDetails from "./BookDetails";
 import Description from "./Description";
 import SaveButtons from "./SaveButtons";
-import { getCategories } from "../functions/getData";
+import { getCategories } from "../functions/extractData";
 
 export default function BookModal({ closeModal, getImageLink, getAuthors, book }) {
     const modalStyle = {

@@ -23,9 +23,16 @@ export default function Navbar({ user }) {
                         <NavLink className="nav-link" to="/">
                             Home
                         </NavLink>
-                        <NavLink className="nav-link" to="/Bookshelf">
-                            Bookshelf
-                        </NavLink>
+                        {user !== null && (
+                            <>
+                                <NavLink className="nav-link" to="/Bookshelf">
+                                    Bookshelf
+                                </NavLink>
+                                <NavLink className="nav-link" to="/Logout">
+                                    Logout
+                                </NavLink>
+                            </>
+                        )}
                         {user === null && (
                             <>
                                 <NavLink className="nav-link" to="/SignUp">
@@ -35,11 +42,6 @@ export default function Navbar({ user }) {
                                     Login
                                 </NavLink>
                             </>
-                        )}
-                        {user !== null && (
-                            <NavLink className="nav-link" to="/Logout">
-                                Logout
-                            </NavLink>
                         )}
                     </div>
                 </div>

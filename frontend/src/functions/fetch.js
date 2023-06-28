@@ -38,7 +38,7 @@ export function getBooksByTitle(title) {
 
 export function getBooksByAuthor(author) {
     const token = "Bearer " + localStorage.getItem("bearerToken");
-    const axiosConfig = getAxiosConfig("/api/search/books/author/" + author, token, "GET", {});
+    const axiosConfig = getAxiosConfig("/api/search/books/author/" + author, "GET", token, {});
     return fetchData(axiosConfig);
 }
 
