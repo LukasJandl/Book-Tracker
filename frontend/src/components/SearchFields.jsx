@@ -59,20 +59,19 @@ export default function SearchFields({ setBooks }) {
     };
 
     return (
-        <form>
+        <div className="ms-4">
             <div className="input-group input-group-sm my-3">
+                Search:
                 <input
                     type="text"
                     id="TitleSearchField"
-                    className="form-control someInput"
+                    className="form-control mx-3 someInput"
                     placeholder="Title"
                     value={title}
                     onChange={handleTitleChange}
                     onKeyDown={handleKeyDown}
                     aria-label="Title"
                 />
-            </div>
-            <div className="input-group input-group-sm mb-3">
                 <input
                     type="text"
                     id="AuthorSearchField"
@@ -84,6 +83,6 @@ export default function SearchFields({ setBooks }) {
                     aria-label="Author"
                 />
             </div>
-        </form>
+        </div>
     );
 }

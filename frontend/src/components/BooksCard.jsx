@@ -2,7 +2,7 @@ import Book from "./BookCard";
 
 export default function BooksCard({ books }) {
     return (
-        <div className="card-body">
+        <div>
             {books.map((book) => (
                 <Book key={book.id} book={book} />
             ))}

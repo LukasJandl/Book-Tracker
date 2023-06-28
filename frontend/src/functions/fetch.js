@@ -31,20 +31,17 @@ async function fetchData(axiosConfig, token) {
 }
 
 export function getBooksByTitle(title) {
-    const token = "Bearer " + localStorage.getItem("bearerToken");
-    const axiosConfig = getAxiosConfig("/api/search/books/title/" + title, "GET", token, {});
+    const axiosConfig = getAxiosConfig("/api/search/books/title/" + title, "GET", "", {});
     return fetchData(axiosConfig);
 }
 
 export function getBooksByAuthor(author) {
-    const token = "Bearer " + localStorage.getItem("bearerToken");
-    const axiosConfig = getAxiosConfig("/api/search/books/author/" + author, "GET", token, {});
+    const axiosConfig = getAxiosConfig("/api/search/books/author/" + author, "GET", "", {});
     return fetchData(axiosConfig);
 }
 
 export function getBooksByTitleAndAuthor(title, author) {
-    const token = "Bearer " + localStorage.getItem("bearerToken");
-    const axiosConfig = getAxiosConfig("/api/search/books/title/" + title + "/author/" + author, "GET", token, {});
+    const axiosConfig = getAxiosConfig("/api/search/books/title/" + title + "/author/" + author, "GET", "", {});
     return fetchData(axiosConfig);
 }
 

@@ -16,8 +16,8 @@ export default function BookCard({ book }) {
     };
 
     return (
-        <div className="container">
-            <div className="card" style={{ width: "60rem" }} onClick={openModal}>
+        <div className="container" style={{ width: "60rem" }}>
+            <div className="card" onClick={openModal}>
                 <div className="row d-flex flex-wrap align-items-center">
                     <div className="col-md-auto">
                         <Image thumbnail={getImageLink(book)} />

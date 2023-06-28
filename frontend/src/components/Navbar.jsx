@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 export default function Navbar({ user }) {
     return (
         <nav className="navbar sticky-top navbar-expand-sm bg-body-tertiary">
-            <div className="container-fluid">
+            <div className="container-fluid mx-3">
                 <NavLink className="navbar-brand" to={"/"}>
                     BookTracker
                 </NavLink>
@@ -19,10 +19,15 @@ export default function Navbar({ user }) {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div className="navbar-nav">
-                        <NavLink className="nav-link" to="/">
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                            <a className="nav-link active" aria-current="page" href="/">
+                                Home
+                            </a>
+                        </li>
+                        {/* <NavLink className="nav-link" to="/">
                             Home
-                        </NavLink>
+                        </NavLink> */}
                         {user !== null && (
                             <>
                                 <NavLink className="nav-link" to="/Bookshelf">
@@ -43,7 +48,7 @@ export default function Navbar({ user }) {
                                 </NavLink>
                             </>
                         )}
-                    </div>
+                    </ul>
                 </div>
             </div>
         </nav>

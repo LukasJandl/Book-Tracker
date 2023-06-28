@@ -2,12 +2,14 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../functions/fetch";
+import Message from "../Message";
 
 export default function SignUp() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [responseMessage, setResponseMessage] = useState("");
+    const [responseStatus, setResponseStatus] = useState("");
 
     const navigate = useNavigate();
 
@@ -21,15 +23,16 @@ export default function SignUp() {
 
         if (response.status === 200) {
             setResponseMessage("Sign up successful!");
+            setResponseStatus("success");
             setTimeout(() => navigate("/"), 1500);
         } else {
-            console.log(response);
             setResponseMessage("Sign up failed!");
+            setResponseStatus("danger");
         }
     };
 
     return (
-        <>
+        <div className="container">
             <div className="form-outline input-group d-flex justify-content-center my-4">
                 <input
                     type="email"
@@ -60,7 +63,7 @@ export default function SignUp() {
                     onChange={(event) => setPassword(event.target.value)}
                 />
             </div>
-            <button type="button" className="btn btn-primary d-grid gap-2 col-3 mb-4 mx-auto" onClick={handleRegister}>
+            <button type="button" className="btn btn-primary d-grid gap-2 col-2 mb-4 mx-auto" onClick={handleRegister}>
                 Register
             </button>
             <div className="text-center">
@@ -69,7 +72,7 @@ export default function SignUp() {
                     <NavLink to="/SignIn">Login</NavLink>
                 </p>
             </div>
-            <div>{responseMessage}</div>
-        </>
+            {responseMessage !== "" && <Message message={responseMessage} type={responseStatus} />}
+        </div>
     );
 }
