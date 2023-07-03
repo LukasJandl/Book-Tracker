@@ -9,7 +9,7 @@ export default function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [responseMessage, setResponseMessage] = useState("");
-    const [responseStatus, setResponseStatus] = useState("");
+    const [messageColor, setMessageColor] = useState("");
 
     const navigate = useNavigate();
 
@@ -20,14 +20,13 @@ export default function SignUp() {
             password: password,
         };
         const response = await registerUser(userData);
+        setResponseMessage(response.data.message);
 
         if (response.status === 200) {
-            setResponseMessage("Sign up successful!");
-            setResponseStatus("success");
+            setMessageColor("success");
             setTimeout(() => navigate("/"), 1500);
         } else {
-            setResponseMessage("Sign up failed!");
-            setResponseStatus("danger");
+            setMessageColor("danger");
         }
     };
 
@@ -72,7 +71,7 @@ export default function SignUp() {
                     <NavLink to="/SignIn">Login</NavLink>
                 </p>
             </div>
-            {responseMessage !== "" && <Message message={responseMessage} type={responseStatus} />}
+            {responseMessage !== "" && <Message message={responseMessage} color={messageColor} />}
         </div>
     );
 }

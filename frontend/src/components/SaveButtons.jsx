@@ -19,12 +19,7 @@ export default function SaveButtons({ book, getAuthors, getImageLink, getCategor
         };
 
         const response = await saveNewBook(newBook);
-
-        if (response.status == 200) {
-            alert("Successfully saved " + book.volumeInfo.title + " as " + status + "!");
-        } else {
-            alert("Something went wrong!");
-        }
+        alert(response.data.message);
     };
 
     return (

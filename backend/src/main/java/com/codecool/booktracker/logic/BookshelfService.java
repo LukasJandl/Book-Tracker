@@ -1,11 +1,11 @@
 package com.codecool.booktracker.logic;
 
-import com.codecool.booktracker.exceptions.BookAlreadyExistsException;
 import com.codecool.booktracker.model.Book;
 import com.codecool.booktracker.model.User;
 import com.codecool.booktracker.model.repositories.BookRepository;
 import com.codecool.booktracker.model.repositories.UserRepository;
-import org.hibernate.ObjectNotFoundException;
+import com.codecool.booktracker.model.response.ResponseMessage;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,37 +30,49 @@ public class BookshelfService {
         return bookRepository.getBookByGoogleId(id);
     }
 
-    public void saveBook(String username, Book newBook) {
+    public ResponseEntity<ResponseMessage> saveBook(String username, Book newBook) {
         Optional<User> user = userRepository.findByUsername(username);
-        if (user.isPresent()) {
-            boolean alreadyExists =
-                    user.get().getBooks().stream().
-                            anyMatch(book -> book.getGoogleId().equals(newBook.getGoogleId()));
-            if (alreadyExists) {
-                throw new BookAlreadyExistsException("The Book: " + newBook.getTitle() + " is already saved");
-            }
-            user.get().getBooks().add(newBook);
-            bookRepository.save(newBook);
-            userRepository.save(user.get());
+        if (user.isEmpty()) {
+            return ResponseEntity.badRequest().body(new ResponseMessage("The user " + username + " doesn't seem to exist!"));
         }
+        if (bookAlreadyExists(user, newBook)) {
+            return ResponseEntity.badRequest().body(new ResponseMessage(newBook.getTitle() + " is already saved!"));
+        }
+        user.get().getBooks().add(newBook);
+        bookRepository.save(newBook);
+        userRepository.save(user.get());
+        return ResponseEntity.ok(new ResponseMessage("Successfully saved " + newBook.getTitle() + " as " + newBook.getStatus()));
     }
 
-    public void updateBookByName(String id, Book updatedBook) {
-        Book book = bookRepository.getBookByGoogleId(id);
-        if (book != null) {
-            book.setStatus(updatedBook.getStatus());
-            bookRepository.save(book);
-        } else {
-            throw new ObjectNotFoundException(Book.class, "Book");
-        }
+    private boolean bookAlreadyExists(Optional<User> user, Book newBook) {
+        return user.get().getBooks().stream().
+                anyMatch(book -> book.getGoogleId().equals(newBook.getGoogleId()));
     }
 
-    public void deleteBookByName(String id) {
-        Book book = bookRepository.getBookByGoogleId(id);
-        if (book != null) {
-            bookRepository.delete(book);
-        } else {
-            throw new ObjectNotFoundException(Book.class, "Book");
+    public ResponseEntity<ResponseMessage> updateBookByName(String username, String id, Book updatedBook) {
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isEmpty()) {
+            return ResponseEntity.badRequest().body(new ResponseMessage("The user " + username + " doesn't seem to exist!"));
         }
+        Book book = bookRepository.getBookByGoogleId(id);
+        if (book == null) {
+            return ResponseEntity.badRequest().body(new ResponseMessage("Could not find " + updatedBook.getTitle()));
+        }
+        book.setStatus(updatedBook.getStatus());
+        bookRepository.save(book);
+        return ResponseEntity.ok(new ResponseMessage("Successfully updated " + updatedBook.getTitle() + " to " + updatedBook.getStatus()));
+    }
+
+    public ResponseEntity<ResponseMessage> deleteBookById(String username, String id) {
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isEmpty()) {
+            return ResponseEntity.badRequest().body(new ResponseMessage("The user " + username + " doesn't seem to exist!"));
+        }
+        Book book = bookRepository.getBookByGoogleId(id);
+        if (book == null) {
+            return ResponseEntity.badRequest().body(new ResponseMessage("Could not find book!"));
+        }
+        bookRepository.delete(book);
+        return ResponseEntity.ok(new ResponseMessage("Successfully deleted book!"));
     }
 }

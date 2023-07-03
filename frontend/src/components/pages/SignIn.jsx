@@ -9,7 +9,7 @@ export default function SignIn({ setUser }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [responseMessage, setResponsemessage] = useState("");
-    const [responseStatus, setResponseStatus] = useState("");
+    const [messageColor, setMessageColor] = useState("");
 
     const navigate = useNavigate();
 
@@ -23,12 +23,12 @@ export default function SignIn({ setUser }) {
             localStorage.setItem("user", username);
             setUser(username);
             setResponsemessage("Login successful!");
-            setResponseStatus("success");
+            setMessageColor("success");
             console.log(response.data);
             setTimeout(() => navigate("/"), 1500);
         } else {
             setResponsemessage("Login failed!");
-            setResponseStatus("danger");
+            setMessageColor("danger");
         }
     };
 
@@ -38,7 +38,7 @@ export default function SignIn({ setUser }) {
                 <input
                     type="username"
                     id="usernameInpuField"
-                    className="someInput"
+                    className="form-control someInput"
                     placeholder="Username"
                     value={username}
                     onChange={(event) => setUsername(event.target.value)}
@@ -48,7 +48,7 @@ export default function SignIn({ setUser }) {
                 <input
                     type="password"
                     id="passwordInpuField"
-                    className="someInput"
+                    className="form-control someInput"
                     placeholder="Password"
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
@@ -65,7 +65,7 @@ export default function SignIn({ setUser }) {
                     <NavLink to="/SignUp">Register</NavLink>
                 </p>
             </div>
-            {responseMessage !== "" && <Message message={responseMessage} type={responseStatus} />}
+            {responseMessage !== "" && <Message message={responseMessage} color={messageColor} />}
         </div>
     );
 }
