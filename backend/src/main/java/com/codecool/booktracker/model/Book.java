@@ -1,6 +1,5 @@
 package com.codecool.booktracker.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +12,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name="books")
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +21,7 @@ public class Book {
     private String authors;
     private String publisher;
     private String publishedDate;
+    @Column(columnDefinition = "TEXT")
     private String description;
     private int pageCount;
     private String categories;

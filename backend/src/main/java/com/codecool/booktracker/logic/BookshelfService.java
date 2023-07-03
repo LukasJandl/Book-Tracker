@@ -35,11 +35,10 @@ public class BookshelfService {
         if (user.isPresent()) {
             boolean alreadyExists =
                     user.get().getBooks().stream().
-                            anyMatch(book -> book.getGoogleId() == newBook.getGoogleId());
+                            anyMatch(book -> book.getGoogleId().equals(newBook.getGoogleId()));
             if (alreadyExists) {
                 throw new BookAlreadyExistsException("The Book: " + newBook.getTitle() + " is already saved");
             }
-            newBook.setDescription(newBook.getDescription().substring(0, 255));
             user.get().getBooks().add(newBook);
             bookRepository.save(newBook);
             userRepository.save(user.get());
