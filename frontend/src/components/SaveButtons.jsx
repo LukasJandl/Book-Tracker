@@ -1,6 +1,15 @@
 import { saveNewBook } from "../functions/fetch";
 
-export default function SaveButtons({ book, bookId, getJoinedAuthors, getImageLink, getJoinedCategories }) {
+export default function SaveButtons({
+    book,
+    bookId,
+    getJoinedAuthors,
+    getImageLink,
+    getJoinedCategories,
+    closeModal,
+    setResponseMessage,
+    setMessageColor,
+}) {
     const saveBook = async (status) => {
         const newBook = {
             googleId: bookId,
@@ -19,7 +28,14 @@ export default function SaveButtons({ book, bookId, getJoinedAuthors, getImageLi
         };
 
         const response = await saveNewBook(newBook);
-        alert(response.data.message);
+        closeModal();
+        window.scrollTo(0, 0);
+        setResponseMessage(response.data.message);
+        if (response.status === 200) {
+            setMessageColor("success");
+        } else {
+            setMessageColor("danger");
+        }
     };
 
     return (

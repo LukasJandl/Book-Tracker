@@ -3,9 +3,19 @@ import Image from "./Image";
 import BookDetails from "./BookDetails";
 import Description from "./Description";
 import SaveButtons from "./SaveButtons";
+import StatusDropdown from "./StatusDropdown";
 import { getJoinedCategories } from "../functions/extractData";
 
-export default function BookModal({ closeModal, book, bookId, isSavedBook, getImageLink, getJoinedAuthors }) {
+export default function BookModal({
+    closeModal,
+    book,
+    bookId,
+    isSavedBook,
+    getImageLink,
+    getJoinedAuthors,
+    setResponseMessage,
+    setMessageColor,
+}) {
     const modalStyle = {
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)",
@@ -33,13 +43,23 @@ export default function BookModal({ closeModal, book, bookId, isSavedBook, getIm
                         <Description bookDescription={book.description} />
                     </div>
                     <div className="modal-footer">
-                        {isSavedBook || (
+                        {(isSavedBook && (
+                            <StatusDropdown
+                                book={book}
+                                closeModal={closeModal}
+                                setResponseMessage={setResponseMessage}
+                                setMessageColor={setMessageColor}
+                            />
+                        )) || (
                             <SaveButtons
                                 book={book}
                                 bookId={bookId}
                                 getJoinedAuthors={getJoinedAuthors}
                                 getImageLink={getImageLink}
                                 getJoinedCategories={getJoinedCategories}
+                                closeModal={closeModal}
+                                setResponseMessage={setResponseMessage}
+                                setMessageColor={setMessageColor}
                             />
                         )}
                     </div>

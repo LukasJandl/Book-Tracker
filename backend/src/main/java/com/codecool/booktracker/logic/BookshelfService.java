@@ -27,7 +27,7 @@ public class BookshelfService {
     }
 
     public Book getBook(String id) {
-        return bookRepository.getBookByGoogleId(id);
+        return bookRepository.getBookById(id);
     }
 
     public ResponseEntity<ResponseMessage> saveBook(String username, Book newBook) {
@@ -54,7 +54,7 @@ public class BookshelfService {
         if (user.isEmpty()) {
             return ResponseEntity.badRequest().body(new ResponseMessage("The user " + username + " doesn't seem to exist!"));
         }
-        Book book = bookRepository.getBookByGoogleId(id);
+        Book book = bookRepository.getBookById(id);
         if (book == null) {
             return ResponseEntity.badRequest().body(new ResponseMessage("Could not find " + updatedBook.getTitle()));
         }
@@ -68,7 +68,7 @@ public class BookshelfService {
         if (user.isEmpty()) {
             return ResponseEntity.badRequest().body(new ResponseMessage("The user " + username + " doesn't seem to exist!"));
         }
-        Book book = bookRepository.getBookByGoogleId(id);
+        Book book = bookRepository.getBookById(id);
         if (book == null) {
             return ResponseEntity.badRequest().body(new ResponseMessage("Could not find book!"));
         }

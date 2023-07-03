@@ -4,7 +4,7 @@ import BookModal from "./BookModal";
 import Image from "./Image";
 import { getImageLink, getJoinedAuthors, getPartialDescription } from "../functions/extractData";
 
-export default function BookCard({ book, bookId, isSavedBook }) {
+export default function BookCard({ book, bookId, isSavedBook, setResponseMessage, setMessageColor }) {
     const [showModal, setShowModal] = useState(false);
 
     const openModal = () => {
@@ -41,6 +41,8 @@ export default function BookCard({ book, bookId, isSavedBook }) {
                     isSavedBook={isSavedBook}
                     getImageLink={getImageLink}
                     getJoinedAuthors={getJoinedAuthors}
+                    setResponseMessage={setResponseMessage}
+                    setMessageColor={setMessageColor}
                 />
             )}
         </>
