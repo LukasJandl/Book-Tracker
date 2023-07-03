@@ -15,5 +15,9 @@ export default function Logout({ setUser }) {
         performLogout(setUser);
     }, []);
 
-    return <div>Performing Logout...</div>;
+    return (
+        <div className="container" style={{ width: "60rem" }}>
+            Performing Logout...
+        </div>
+    );
 }

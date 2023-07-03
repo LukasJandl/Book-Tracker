@@ -14,6 +14,8 @@ export default function StatusDropdown({ book, closeModal, setResponseMessage, s
         } else {
             setMessageColor("danger");
         }
+        setTimeout(() => setResponseMessage(""), 3000);
+        setTimeout(() => setMessageColor(""), 3000);
     };
 
     return (

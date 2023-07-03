@@ -36,6 +36,8 @@ export default function SaveButtons({
         } else {
             setMessageColor("danger");
         }
+        setTimeout(() => setResponseMessage(""), 4000);
+        setTimeout(() => setMessageColor(""), 4000);
     };
 
     return (

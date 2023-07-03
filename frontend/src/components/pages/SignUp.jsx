@@ -31,7 +31,7 @@ export default function SignUp() {
     };
 
     return (
-        <div className="container">
+        <div className="container" style={{ width: "21rem" }}>
             <div className="form-outline input-group d-flex justify-content-center my-4">
                 <input
                     type="email"
@@ -62,7 +62,7 @@ export default function SignUp() {
                     onChange={(event) => setPassword(event.target.value)}
                 />
             </div>
-            <button type="button" className="btn btn-primary d-grid gap-2 col-2 mb-4 mx-auto" onClick={handleRegister}>
+            <button type="button" className="btn btn-primary d-grid col-12 mb-4 mx-auto" onClick={handleRegister}>
                 Register
             </button>
             <div className="text-center">

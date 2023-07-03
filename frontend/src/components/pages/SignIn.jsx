@@ -32,7 +32,7 @@ export default function SignIn({ setUser }) {
     };
 
     return (
-        <div className="container">
+        <div className="container" style={{ width: "21rem" }}>
             <div className="form-outline input-group d-flex justify-content-center my-4">
                 <input
                     type="username"
@@ -54,7 +54,7 @@ export default function SignIn({ setUser }) {
                 />
             </div>
 
-            <button type="button" className="btn btn-primary d-grid gap-2 col-2 mb-4 mx-auto" onClick={handleLogin}>
+            <button type="button" className="btn btn-primary d-grid col-12 mb-4 mx-auto" onClick={handleLogin}>
                 Login
             </button>
 
