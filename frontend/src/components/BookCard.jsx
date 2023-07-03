@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import BookModal from "./BookModal";
 import Image from "./Image";
-import { getImageLink, getAuthors, getPartialDescription } from "../functions/extractData";
+import { getImageLink, getJoinedAuthors, getPartialDescription } from "../functions/extractData";
 
-export default function BookCard({ book }) {
+export default function BookCard({ book, bookId, isSavedBook = false }) {
     const [showModal, setShowModal] = useState(false);
 
     const openModal = () => {
@@ -20,22 +20,28 @@ export default function BookCard({ book }) {
             <div className="card" onClick={openModal}>
                 <div className="row d-flex flex-wrap align-items-center">
                     <div className="col-md-auto">
-                        <Image thumbnail={getImageLink(book)} />
+                        <Image thumbnail={(isSavedBook && book.thumbnail) || getImageLink(book)} />
                     </div>
                     <div className="col">
                         <div className="card-body">
-                            <h5 className="card-title">{book.volumeInfo.title}</h5>
-                            <h6 className="card-subtitle mb-2 text-body-secondary">{getAuthors(book)}</h6>
-                            <p className="card-text">
-                                {book.id}
-                                {getPartialDescription(book)}
-                            </p>
+                            <h5 className="card-title">{book.title}</h5>
+                            <h6 className="card-subtitle mb-2 text-body-secondary">
+                                {(isSavedBook && book.authors) || getJoinedAuthors(book.authors)}
+                            </h6>
+                            <p className="card-text">{getPartialDescription(book.description)}</p>
                         </div>
                     </div>
                 </div>
             </div>
             {showModal && (
-                <BookModal closeModal={closeModal} getImageLink={getImageLink} getAuthors={getAuthors} book={book} />
+                <BookModal
+                    closeModal={closeModal}
+                    book={book}
+                    bookId={bookId}
+                    isSavedBook={isSavedBook}
+                    getImageLink={getImageLink}
+                    getJoinedAuthors={getJoinedAuthors}
+                />
             )}
         </div>
     );

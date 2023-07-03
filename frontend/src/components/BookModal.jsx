@@ -3,9 +3,9 @@ import Image from "./Image";
 import BookDetails from "./BookDetails";
 import Description from "./Description";
 import SaveButtons from "./SaveButtons";
-import { getCategories } from "../functions/extractData";
+import { getJoinedCategories } from "../functions/extractData";
 
-export default function BookModal({ closeModal, getImageLink, getAuthors, book }) {
+export default function BookModal({ closeModal, book, bookId, isSavedBook, getImageLink, getJoinedAuthors }) {
     const modalStyle = {
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)",
@@ -17,26 +17,31 @@ export default function BookModal({ closeModal, getImageLink, getAuthors, book }
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">
-                            {book.volumeInfo.title}
+                            {book.title}
                             <div>
-                                <i className="card-subtitle text-body-secondary small">{getAuthors(book)}</i>
+                                <i className="card-subtitle text-body-secondary small">
+                                    {(isSavedBook && book.authors) || getJoinedAuthors(book.authors)}
+                                </i>
                             </div>
                         </h5>
                         <button type="button" className="btn-close" aria-label="Close" onClick={closeModal}></button>
                     </div>
                     <div className="modal-body">
-                        <Image thumbnail={getImageLink(book)} />
+                        <Image thumbnail={(isSavedBook && book.thumbnail) || getImageLink(book)} />
                         <Rating book={book} />
-                        <BookDetails book={book} getCategories={getCategories} />
-                        <Description book={book} />
+                        <BookDetails book={book} isSavedBook={isSavedBook} getJoinedCategories={getJoinedCategories} />
+                        <Description bookDescription={book.description} />
                     </div>
                     <div className="modal-footer">
-                        <SaveButtons
-                            book={book}
-                            getAuthors={getAuthors}
-                            getImageLink={getImageLink}
-                            getCategories={getCategories}
-                        />
+                        {isSavedBook || (
+                            <SaveButtons
+                                book={book}
+                                bookId={bookId}
+                                getJoinedAuthors={getJoinedAuthors}
+                                getImageLink={getImageLink}
+                                getJoinedCategories={getJoinedCategories}
+                            />
+                        )}
                     </div>
                 </div>
             </div>

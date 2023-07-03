@@ -1,10 +1,10 @@
-import Book from "./BookCard";
+import BookCard from "./BookCard";
 
 export default function BooksCard({ books }) {
     return (
         <div>
             {books.map((book) => (
-                <Book key={book.id} book={book} />
+                <BookCard key={book.id} book={book.volumeInfo} bookId={book.id} />
             ))}
         </div>
     );

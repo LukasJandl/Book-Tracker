@@ -21,11 +21,10 @@ export default function SignIn({ setUser }) {
         if (response.status === 200) {
             localStorage.setItem("bearerToken", response.data);
             localStorage.setItem("user", username);
-            setUser(username);
             setResponsemessage("Login successful!");
             setMessageColor("success");
-            console.log(response.data);
             setTimeout(() => navigate("/"), 1500);
+            setTimeout(() => setUser(username), 1500);
         } else {
             setResponsemessage("Login failed!");
             setMessageColor("danger");

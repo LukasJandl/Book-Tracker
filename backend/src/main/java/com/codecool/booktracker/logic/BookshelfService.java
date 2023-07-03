@@ -23,7 +23,7 @@ public class BookshelfService {
 
     public List<Book> getAllBooks(String username) {
         Optional<User> user = userRepository.findByUsername(username);
-        return user.map(User::getBooks).orElse(null);
+        return user.get().getBooks();
     }
 
     public Book getBook(String id) {

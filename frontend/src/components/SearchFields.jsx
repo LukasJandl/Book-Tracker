@@ -60,7 +60,7 @@ export default function SearchFields({ setBooks }) {
 
     return (
         <div className="ms-4">
-            <div className="input-group input-group-sm my-3">
+            <div className="input-group input-group-sm mb-3">
                 Search:
                 <input
                     type="text"

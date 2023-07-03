@@ -1,8 +1,8 @@
-export default function Description({ book }) {
+export default function Description({ bookDescription }) {
     return (
         <>
             <h5>Description:</h5>
-            <p>{book.volumeInfo.description}</p>
+            <p>{bookDescription}</p>
         </>
     );
 }

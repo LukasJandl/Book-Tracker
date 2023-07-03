@@ -1,19 +1,19 @@
 import { saveNewBook } from "../functions/fetch";
 
-export default function SaveButtons({ book, getAuthors, getImageLink, getCategories }) {
+export default function SaveButtons({ book, bookId, getJoinedAuthors, getImageLink, getJoinedCategories }) {
     const saveBook = async (status) => {
         const newBook = {
-            googleId: book.id,
-            title: book.volumeInfo.title,
-            authors: getAuthors(book),
-            publisher: book.volumeInfo.publisher,
-            publishedDate: book.volumeInfo.publishedDate,
-            description: book.volumeInfo.description,
-            pageCount: book.volumeInfo.pageCount,
-            categories: getCategories(book),
-            averageRating: book.volumeInfo.averageRating,
-            ratingsCount: book.volumeInfo.ratingsCount,
-            language: book.volumeInfo.language,
+            googleId: bookId,
+            title: book.title,
+            authors: getJoinedAuthors(book.authors),
+            publisher: book.publisher,
+            publishedDate: book.publishedDate,
+            description: book.description,
+            pageCount: book.pageCount,
+            categories: getJoinedCategories(book.categories),
+            averageRating: book.averageRating,
+            ratingsCount: book.ratingsCount,
+            language: book.language,
             thumbnail: getImageLink(book),
             status: status,
         };

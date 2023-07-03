@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 export default function Navbar({ user }) {
     return (
-        <nav className="navbar sticky-top navbar-expand-sm bg-body-tertiary">
+        <nav className="navbar sticky-top navbar-expand-sm bg-body-tertiary mb-3">
             <div className="container-fluid mx-3">
                 <NavLink className="navbar-brand" to={"/"}>
                     BookTracker
@@ -19,15 +19,10 @@ export default function Navbar({ user }) {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="/">
-                                Home
-                            </a>
-                        </li>
-                        {/* <NavLink className="nav-link" to="/">
+                    <div className="navbar-nav">
+                        <NavLink className="nav-link" to="/">
                             Home
-                        </NavLink> */}
+                        </NavLink>
                         {user !== null && (
                             <>
                                 <NavLink className="nav-link" to="/Bookshelf">
@@ -36,6 +31,7 @@ export default function Navbar({ user }) {
                                 <NavLink className="nav-link" to="/Logout">
                                     Logout
                                 </NavLink>
+                                Logged in as {localStorage.getItem("user")}
                             </>
                         )}
                         {user === null && (
@@ -48,7 +44,7 @@ export default function Navbar({ user }) {
                                 </NavLink>
                             </>
                         )}
-                    </ul>
+                    </div>
                 </div>
             </div>
         </nav>
