@@ -59,8 +59,8 @@ export default function SearchFields({ setBooks }) {
     };
 
     return (
-        <div className="ms-4">
-            <div className="input-group input-group-sm mb-3">
+        <>
+            <div className="d-flex justify-content-center input-group input-group-sm mb-3">
                 Search:
                 <input
                     type="text"
@@ -83,6 +83,6 @@ export default function SearchFields({ setBooks }) {
                     aria-label="Author"
                 />
             </div>
-        </div>
+        </>
     );
 }

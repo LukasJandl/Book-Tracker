@@ -33,9 +33,9 @@ public class BookshelfEndpoint {
         return bookshelfService.saveBook(username, book);
     }
 
-    @PutMapping("/{username}/{title}")
-    public ResponseEntity<ResponseMessage> updateBook(@PathVariable String username, @PathVariable String title, @RequestBody Book updatedBook) {
-        return bookshelfService.updateBookByName(username, title, updatedBook);
+    @PutMapping("/{username}/{id}")
+    public ResponseEntity<ResponseMessage> updateBook(@PathVariable String username, @PathVariable String id, @RequestBody Book updatedBook) {
+        return bookshelfService.updateBookByName(username, id, updatedBook);
     }
 
     @DeleteMapping("/{username}/{id}")

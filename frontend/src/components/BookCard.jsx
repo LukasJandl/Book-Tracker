@@ -4,7 +4,7 @@ import BookModal from "./BookModal";
 import Image from "./Image";
 import { getImageLink, getJoinedAuthors, getPartialDescription } from "../functions/extractData";
 
-export default function BookCard({ book, bookId, isSavedBook = false }) {
+export default function BookCard({ book, bookId, isSavedBook }) {
     const [showModal, setShowModal] = useState(false);
 
     const openModal = () => {
@@ -16,7 +16,7 @@ export default function BookCard({ book, bookId, isSavedBook = false }) {
     };
 
     return (
-        <div className="container" style={{ width: "60rem" }}>
+        <>
             <div className="card" onClick={openModal}>
                 <div className="row d-flex flex-wrap align-items-center">
                     <div className="col-md-auto">
@@ -43,6 +43,6 @@ export default function BookCard({ book, bookId, isSavedBook = false }) {
                     getJoinedAuthors={getJoinedAuthors}
                 />
             )}
-        </div>
+        </>
     );
 }

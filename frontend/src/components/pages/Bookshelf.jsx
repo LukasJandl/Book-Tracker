@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { getAllBooks } from "../../functions/fetch";
-import BookCard from "../BookCard";
+import BooksCard from "../BooksCard";
+import FilterCard from "../FilterCard";
 
 export default function Bookshelf() {
     const [books, setBooks] = useState([]);
+    const [displayedBooks, setDisplayedBooks] = useState([]);
 
     useEffect(() => {
         getSavedBooks();
@@ -19,9 +21,9 @@ export default function Bookshelf() {
     };
 
     return (
-        <div>
-            {books.length !== null &&
-                books.map((book) => <BookCard key={book.id} book={book} bookId={book.id} isSavedBook={true} />)}
+        <div className="container" style={{ width: "60rem" }}>
+            <FilterCard books={books} setDisplayedBooks={setDisplayedBooks} />
+            <BooksCard books={displayedBooks} isSavedBooks={true} />
         </div>
     );
 }
