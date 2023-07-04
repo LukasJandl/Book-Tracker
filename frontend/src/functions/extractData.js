@@ -16,5 +16,5 @@ export const getJoinedCategories = (categories) => {
 };
 
 export const getPartialDescription = (description) => {
-    return description == null ? null : description.substr(0, 300) + "...";
+    return description == null ? null : description.length <= 300 ? description : description.substr(0, 300) + "...";
 };

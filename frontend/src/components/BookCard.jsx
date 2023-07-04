@@ -39,8 +39,6 @@ export default function BookCard({ book, bookId, isSavedBook, setResponseMessage
                     book={book}
                     bookId={bookId}
                     isSavedBook={isSavedBook}
-                    getImageLink={getImageLink}
-                    getJoinedAuthors={getJoinedAuthors}
                     setResponseMessage={setResponseMessage}
                     setMessageColor={setMessageColor}
                 />

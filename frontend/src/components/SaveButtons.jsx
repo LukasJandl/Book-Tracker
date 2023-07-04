@@ -1,13 +1,7 @@
 import { saveNewBook } from "../functions/fetch";
+import { getJoinedCategories, getImageLink, getJoinedAuthors } from "../functions/extractData";
 
-export default function SaveButtons({
-    book,
-    bookId,
-    getJoinedAuthors,
-    getImageLink,
-    getJoinedCategories,
-    handleResponse,
-}) {
+export default function SaveButtons({ book, bookId, handleResponse }) {
     const saveBook = async (status) => {
         const newBook = {
             googleId: bookId,

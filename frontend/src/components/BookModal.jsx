@@ -5,18 +5,9 @@ import Description from "./Description";
 import SaveButtons from "./SaveButtons";
 import StatusDropdown from "./StatusDropdown";
 import DeleteButton from "./DeleteButton";
-import { getJoinedCategories } from "../functions/extractData";
+import { getJoinedCategories, getImageLink, getJoinedAuthors } from "../functions/extractData";
 
-export default function BookModal({
-    closeModal,
-    book,
-    bookId,
-    isSavedBook,
-    getImageLink,
-    getJoinedAuthors,
-    setResponseMessage,
-    setMessageColor,
-}) {
+export default function BookModal({ closeModal, book, bookId, isSavedBook, setResponseMessage, setMessageColor }) {
     const modalStyle = {
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)",
@@ -59,20 +50,10 @@ export default function BookModal({
                     <div className="modal-footer">
                         {(isSavedBook && (
                             <>
-                                {console.log(book)}
                                 <DeleteButton book={book} handleResponse={handleResponse} />
                                 <StatusDropdown book={book} handleResponse={handleResponse} />
                             </>
-                        )) || (
-                            <SaveButtons
-                                book={book}
-                                bookId={bookId}
-                                getJoinedAuthors={getJoinedAuthors}
-                                getImageLink={getImageLink}
-                                getJoinedCategories={getJoinedCategories}
-                                handleResponse={handleResponse}
-                            />
-                        )}
+                        )) || <SaveButtons book={book} bookId={bookId} handleResponse={handleResponse} />}
                     </div>
                 </div>
             </div>
