@@ -4,6 +4,7 @@ import BookDetails from "./BookDetails";
 import Description from "./Description";
 import SaveButtons from "./SaveButtons";
 import StatusDropdown from "./StatusDropdown";
+import DeleteButton from "./DeleteButton";
 import { getJoinedCategories } from "../functions/extractData";
 
 export default function BookModal({
@@ -19,6 +20,19 @@ export default function BookModal({
     const modalStyle = {
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)",
+    };
+
+    const handleResponse = (response) => {
+        closeModal();
+        window.scrollTo(0, 0);
+        setResponseMessage(response.data.message);
+        if (response.status === 200) {
+            setMessageColor("success");
+        } else {
+            setMessageColor("danger");
+        }
+        setTimeout(() => setResponseMessage(""), 3000);
+        setTimeout(() => setMessageColor(""), 3000);
     };
 
     return (
@@ -44,12 +58,11 @@ export default function BookModal({
                     </div>
                     <div className="modal-footer">
                         {(isSavedBook && (
-                            <StatusDropdown
-                                book={book}
-                                closeModal={closeModal}
-                                setResponseMessage={setResponseMessage}
-                                setMessageColor={setMessageColor}
-                            />
+                            <>
+                                {console.log(book)}
+                                <DeleteButton book={book} handleResponse={handleResponse} />
+                                <StatusDropdown book={book} handleResponse={handleResponse} />
+                            </>
                         )) || (
                             <SaveButtons
                                 book={book}
@@ -57,9 +70,7 @@ export default function BookModal({
                                 getJoinedAuthors={getJoinedAuthors}
                                 getImageLink={getImageLink}
                                 getJoinedCategories={getJoinedCategories}
-                                closeModal={closeModal}
-                                setResponseMessage={setResponseMessage}
-                                setMessageColor={setMessageColor}
+                                handleResponse={handleResponse}
                             />
                         )}
                     </div>

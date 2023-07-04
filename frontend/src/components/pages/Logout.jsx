@@ -7,7 +7,7 @@ export default function Logout({ setUser }) {
     const performLogout = (setUser) => {
         localStorage.removeItem("bearerToken");
         localStorage.removeItem("user");
-        setUser(null);
+        setTimeout(() => setUser(null), 1500);
         setTimeout(() => navigate("/"), 1500);
     };
 

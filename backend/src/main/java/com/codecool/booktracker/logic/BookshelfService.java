@@ -26,10 +26,6 @@ public class BookshelfService {
         return user.get().getBooks();
     }
 
-    public Book getBook(String id) {
-        return bookRepository.getBookById(id);
-    }
-
     public ResponseEntity<ResponseMessage> saveBook(String username, Book newBook) {
         Optional<User> user = userRepository.findByUsername(username);
         if (user.isEmpty()) {
@@ -49,12 +45,12 @@ public class BookshelfService {
                 anyMatch(book -> book.getGoogleId().equals(newBook.getGoogleId()));
     }
 
-    public ResponseEntity<ResponseMessage> updateBookByName(String username, String id, Book updatedBook) {
+    public ResponseEntity<ResponseMessage> updateBookByName(String username, Book updatedBook) {
         Optional<User> user = userRepository.findByUsername(username);
         if (user.isEmpty()) {
             return ResponseEntity.badRequest().body(new ResponseMessage("The user " + username + " doesn't seem to exist!"));
         }
-        Book book = bookRepository.getBookById(id);
+        Book book = bookRepository.getBookById(updatedBook.getId());
         if (book == null) {
             return ResponseEntity.badRequest().body(new ResponseMessage("Could not find " + updatedBook.getTitle()));
         }
@@ -63,16 +59,18 @@ public class BookshelfService {
         return ResponseEntity.ok(new ResponseMessage("Successfully updated " + updatedBook.getTitle() + " to " + updatedBook.getStatus()));
     }
 
-    public ResponseEntity<ResponseMessage> deleteBookById(String username, String id) {
+    public ResponseEntity<ResponseMessage> deleteBookById(String username, long id) {
         Optional<User> user = userRepository.findByUsername(username);
         if (user.isEmpty()) {
             return ResponseEntity.badRequest().body(new ResponseMessage("The user " + username + " doesn't seem to exist!"));
         }
-        Book book = bookRepository.getBookById(id);
-        if (book == null) {
+        Optional<Book> book = user.get().getBooks().stream()
+                .filter(b -> b.getId() == id).findFirst();
+        if (book.isEmpty()) {
             return ResponseEntity.badRequest().body(new ResponseMessage("Could not find book!"));
         }
-        bookRepository.delete(book);
+        user.get().getBooks().removeIf(b -> b.getId() == id);
+        bookRepository.deleteById(id);
         return ResponseEntity.ok(new ResponseMessage("Successfully deleted book!"));
     }
 }

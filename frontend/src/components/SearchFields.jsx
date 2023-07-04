@@ -61,11 +61,10 @@ export default function SearchFields({ setBooks }) {
     return (
         <>
             <div className="d-flex justify-content-center input-group input-group-sm mb-3">
-                Search:
                 <input
                     type="text"
                     id="TitleSearchField"
-                    className="form-control mx-3 someInput"
+                    className="form-control ms-2 someInput"
                     placeholder="Title"
                     value={title}
                     onChange={handleTitleChange}
@@ -75,13 +74,16 @@ export default function SearchFields({ setBooks }) {
                 <input
                     type="text"
                     id="AuthorSearchField"
-                    className="form-control someInput"
+                    className="form-control mx-2 someInput"
                     placeholder="Author"
                     value={author}
                     onChange={handleAuthorChange}
                     onKeyDown={handleKeyDown}
                     aria-label="Author"
                 />
+                <button className="btn btn-secondary" type="button" onClick={handleInput}>
+                    Search
+                </button>
             </div>
         </>
     );

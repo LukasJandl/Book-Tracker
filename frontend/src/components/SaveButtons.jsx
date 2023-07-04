@@ -6,9 +6,7 @@ export default function SaveButtons({
     getJoinedAuthors,
     getImageLink,
     getJoinedCategories,
-    closeModal,
-    setResponseMessage,
-    setMessageColor,
+    handleResponse,
 }) {
     const saveBook = async (status) => {
         const newBook = {
@@ -28,16 +26,7 @@ export default function SaveButtons({
         };
 
         const response = await saveNewBook(newBook);
-        closeModal();
-        window.scrollTo(0, 0);
-        setResponseMessage(response.data.message);
-        if (response.status === 200) {
-            setMessageColor("success");
-        } else {
-            setMessageColor("danger");
-        }
-        setTimeout(() => setResponseMessage(""), 4000);
-        setTimeout(() => setMessageColor(""), 4000);
+        handleResponse(response);
     };
 
     return (

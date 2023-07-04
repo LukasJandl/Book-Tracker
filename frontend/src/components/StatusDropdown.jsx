@@ -1,21 +1,12 @@
 import { updateBook } from "../functions/fetch";
 
-export default function StatusDropdown({ book, closeModal, setResponseMessage, setMessageColor }) {
+export default function StatusDropdown({ book, handleResponse }) {
     const updateStatus = async (event) => {
         const updatedBook = book;
         updatedBook.status = event.target.innerHTML;
 
         const response = await updateBook(updatedBook);
-        closeModal();
-        window.scrollTo(0, 0);
-        setResponseMessage(response.data.message);
-        if (response.status === 200) {
-            setMessageColor("success");
-        } else {
-            setMessageColor("danger");
-        }
-        setTimeout(() => setResponseMessage(""), 3000);
-        setTimeout(() => setMessageColor(""), 3000);
+        handleResponse(response);
     };
 
     return (
@@ -26,7 +17,7 @@ export default function StatusDropdown({ book, closeModal, setResponseMessage, s
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
             >
-                Dropdown button
+                Reading Status
             </button>
             <ul className="dropdown-menu">
                 <li>

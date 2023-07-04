@@ -13,6 +13,12 @@ export default function SignIn({ setUser }) {
 
     const navigate = useNavigate();
 
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            handleLogin();
+        }
+    };
+
     const handleLogin = async () => {
         const token = `${username}:${password}`;
         const encodedToken = Buffer.from(token).toString("base64");
@@ -41,6 +47,7 @@ export default function SignIn({ setUser }) {
                     placeholder="Username"
                     value={username}
                     onChange={(event) => setUsername(event.target.value)}
+                    onKeyDown={handleKeyDown}
                 />
             </div>
             <div className="form-outline input-group d-flex justify-content-center my-4">
@@ -51,6 +58,7 @@ export default function SignIn({ setUser }) {
                     placeholder="Password"
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
+                    onKeyDown={handleKeyDown}
                 />
             </div>
 

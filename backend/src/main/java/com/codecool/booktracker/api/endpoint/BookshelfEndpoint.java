@@ -23,23 +23,19 @@ public class BookshelfEndpoint {
         return bookshelfService.getAllBooks(username);
     }
 
-    @GetMapping("/{title}")
-    public Book getBook(@PathVariable String title) {
-        return bookshelfService.getBook(title);
-    }
-
     @PostMapping("/{username}")
     public ResponseEntity<ResponseMessage> saveBook(@PathVariable String username, @RequestBody Book book) {
         return bookshelfService.saveBook(username, book);
     }
 
-    @PutMapping("/{username}/{id}")
-    public ResponseEntity<ResponseMessage> updateBook(@PathVariable String username, @PathVariable String id, @RequestBody Book updatedBook) {
-        return bookshelfService.updateBookByName(username, id, updatedBook);
+    @PutMapping("/{username}")
+    public ResponseEntity<ResponseMessage> updateBook(@PathVariable String username, @RequestBody Book updatedBook) {
+        return bookshelfService.updateBookByName(username, updatedBook);
     }
 
-    @DeleteMapping("/{username}/{id}")
-    public ResponseEntity<ResponseMessage> deleteBook(@PathVariable String username, @PathVariable String id) {
-        return bookshelfService.deleteBookById(username, id);
+    @DeleteMapping("/{username}")
+    public ResponseEntity<ResponseMessage> deleteBook(@PathVariable String username, @RequestBody Book book) {
+        System.out.println("am here");
+        return bookshelfService.deleteBookById(username, book.getId());
     }
 }

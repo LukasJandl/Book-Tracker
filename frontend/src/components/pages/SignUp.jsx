@@ -13,6 +13,12 @@ export default function SignUp() {
 
     const navigate = useNavigate();
 
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            handleRegister();
+        }
+    };
+
     const handleRegister = async () => {
         const userData = {
             email: email,
@@ -45,6 +51,7 @@ export default function SignUp() {
                     placeholder="Email"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
+                    onKeyDown={handleKeyDown}
                 />
             </div>
             <div className="form-outline input-group d-flex justify-content-center my-4">
@@ -55,6 +62,7 @@ export default function SignUp() {
                     placeholder="Username"
                     value={username}
                     onChange={(event) => setUsername(event.target.value)}
+                    onKeyDown={handleKeyDown}
                 />
             </div>
             <div className="form-outline input-group d-flex justify-content-center mb-4">
