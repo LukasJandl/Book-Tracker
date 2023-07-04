@@ -20,7 +20,12 @@ export default function SignUp() {
             password: password,
         };
         const response = await registerUser(userData);
-        setResponseMessage(response.data.message);
+        console.log(response);
+        if (response.data === "") {
+            setResponseMessage("Registration failed! Please enter valid email, username and password.");
+        } else {
+            setResponseMessage(response.data.message);
+        }
 
         if (response.status === 200) {
             setMessageColor("success");
@@ -32,7 +37,7 @@ export default function SignUp() {
 
     return (
         <div className="container" style={{ width: "21rem" }}>
-            <div className="form-outline input-group d-flex justify-content-center my-4">
+            <div className="form-outline input-group d-flex justify-content-center mt-5">
                 <input
                     type="email"
                     id="emailInpuField"
@@ -42,7 +47,7 @@ export default function SignUp() {
                     onChange={(event) => setEmail(event.target.value)}
                 />
             </div>
-            <div className="form-outline input-group d-flex justify-content-center mb-4">
+            <div className="form-outline input-group d-flex justify-content-center my-4">
                 <input
                     type="username"
                     id="usernameInpuField"

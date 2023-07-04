@@ -26,14 +26,14 @@ export default function SignIn({ setUser }) {
             setTimeout(() => navigate("/"), 1500);
             setTimeout(() => setUser(username), 1500);
         } else {
-            setResponsemessage("Login failed!");
+            setResponsemessage("Wrong username and/or password!");
             setMessageColor("danger");
         }
     };
 
     return (
         <div className="container" style={{ width: "21rem" }}>
-            <div className="form-outline input-group d-flex justify-content-center my-4">
+            <div className="form-outline input-group d-flex justify-content-center mt-5">
                 <input
                     type="username"
                     id="usernameInpuField"
@@ -43,7 +43,7 @@ export default function SignIn({ setUser }) {
                     onChange={(event) => setUsername(event.target.value)}
                 />
             </div>
-            <div className="form-outline input-group d-flex justify-content-center mb-4">
+            <div className="form-outline input-group d-flex justify-content-center my-4">
                 <input
                     type="password"
                     id="passwordInpuField"
