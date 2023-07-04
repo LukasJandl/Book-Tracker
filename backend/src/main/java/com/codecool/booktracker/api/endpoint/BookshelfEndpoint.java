@@ -35,7 +35,6 @@ public class BookshelfEndpoint {
 
     @DeleteMapping("/{username}")
     public ResponseEntity<ResponseMessage> deleteBook(@PathVariable String username, @RequestBody Book book) {
-        System.out.println("am here");
         return bookshelfService.deleteBookById(username, book.getId());
     }
 }
