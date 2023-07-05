@@ -42,3 +42,24 @@ When both servers are running, open the following link in your browser to open t
 
 There is one default user provided for the login:
 - Username: `user`, Password: `user`
+
+## Screenshots
+
+Landing page with a logged in user:
+![image](https://raw.githubusercontent.com/LukasJandl/Book-Tracker/main/screenshots/Landing_2.png)
+
+Searching for books:
+![image](https://raw.githubusercontent.com/LukasJandl/Book-Tracker/main/screenshots/Search_for_title.png)
+
+Modal with book details:
+![image](https://raw.githubusercontent.com/LukasJandl/Book-Tracker/main/screenshots/Modal_1.png)
+
+Bookshelf with saved books:
+![image](https://raw.githubusercontent.com/LukasJandl/Book-Tracker/main/screenshots/Bookshelf.png)
+
+Registration page with error message:
+![image](https://raw.githubusercontent.com/LukasJandl/Book-Tracker/main/screenshots/Register_3.png)
+
+
+
+
